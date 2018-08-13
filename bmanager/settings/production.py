@@ -1,6 +1,5 @@
 from .base import *
 
-from prettyconf import config
 import dj_database_url
 
 

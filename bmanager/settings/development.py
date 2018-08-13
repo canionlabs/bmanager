@@ -1,6 +1,7 @@
 from .base import *
 import os
 
+
 DEBUG = config("DEBUG", default=True, cast=config.boolean)
 
 ALLOWED_HOSTS = ['*']
