@@ -1,14 +1,7 @@
-env-dev:
-	pip istall -r requirements/development.txt
+env = development
 
+install: 
+	pip install -r requirements/$(env).txt
 
-env-prod:
-	pip istall -r requirements/production.txt
-
-
-start-dev:
-	python manage.py runserver --settings=bmanager.settings.development
-
-
-start-prod:
-	python manage.py runserver --settings=bmanager.settings.production
+run:
+	python manage.py runserver --settings=bmanager.settings.$(env)
