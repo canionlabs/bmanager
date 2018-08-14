@@ -4,15 +4,26 @@ Django 2.1
 """
 
 from prettyconf import config
+import dj_database_url
+
 import os
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config("SECRET_KEY")
 
+
+# B databases
+# postgres://USER:PASSWORD@HOST:PORT/NAME
+DATABASES = {
+	'busers': dj_database_url.parse(config('BUSERS_DB')),
+	'breports': dj_database_url.parse(config('BREPORTS_DB'))
+}
+
+DATABASE_ROUTERS = ['bmanager.routers.DBRouter']
 
 # Application definition
 
@@ -23,6 +34,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'apps.busers'
+    'apps.breports'
 ]
 
 MIDDLEWARE = [
