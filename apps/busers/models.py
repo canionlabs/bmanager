@@ -45,6 +45,11 @@ class ForwardingTokens(models.Model):
         managed = False
         db_table = 'forwarding_tokens'
         unique_together = (('token', 'host'),)
+        verbose_name = 'Forwarding Token'
+        verbose_name_plural = 'Forwarding Tokens'
+
+    def __str__(self):
+        return f'{self.token}'
 
 
 class Purchase(models.Model):
@@ -93,3 +98,8 @@ class Users(models.Model):
         managed = False
         db_table = 'users'
         unique_together = (('email', 'appname'),)
+        verbose_name = 'Blynk User'
+        verbose_name_plural = 'Blynk Users'
+
+    def __str__(self):
+        return f'{self.email}'

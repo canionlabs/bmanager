@@ -163,7 +163,12 @@ class ReportingRawData(models.Model):
     stringvalue = models.TextField(blank=True, null=True)
     doublevalue = models.FloatField(blank=True, null=True)
 
+    def __str__(self):
+        return f'{self.email}'
+
     class Meta:
         managed = False
         db_table = 'reporting_raw_data'
         unique_together = (('email', 'project_id', 'device_id', 'pin', 'pintype', 'ts'),)
+        verbose_name = 'Reporting Raw'
+        verbose_name_plural = 'Reporting Raw'
