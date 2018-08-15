@@ -1,0 +1,64 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="content">
+    <div class="columns">
+      <h1 class="title column is-3">Relatório Diário</h1>
+      <div class="column">
+        <a class="button is-primary is-outlined">
+          <!-- <span class="icon is-small">
+            <i class="fas fa-check"></i>
+          </span> -->
+          <span>Imprimir</span>
+        </a>
+      </div>
+    </div>
+
+    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+      <thead>
+        <tr>
+          <th>Dispositivo</th>
+          <th>Temperatura Min</th>
+          <th>Temperatura Max</th>
+          <th>Temperatura Atual</th>
+          <th>Horário</th>
+        </tr>
+      </thead>        
+      <tbody>
+        <tr>
+          <td>TDGFDGERE3123434</td>
+          <td>24 ˚C</td>
+          <td>35 ˚C</td>
+          <td>30 ˚C</td>
+          <td>14-Agosto-2019 19:00:23</td>
+        </tr>
+        <tr>
+          <td>TDGFDGERE3123434</td>
+          <td>24 ˚C</td>
+          <td>35 ˚C</td>
+          <td>30 ˚C</td>
+          <td>14-Agosto-2019 19:00:23</td>
+        </tr>
+        <tr>
+          <td>TDGFDGERE3123434</td>
+          <td>24 ˚C</td>
+          <td>35 ˚C</td>
+          <td>30 ˚C</td>
+          <td>14-Agosto-2019 19:00:23</td>
+        </tr>
+        <tr>
+          <td>TDGFDGERE3123434</td>
+          <td>24 ˚C</td>
+          <td>35 ˚C</td>
+          <td>30 ˚C</td>
+          <td>14-Agosto-2019 19:00:23</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

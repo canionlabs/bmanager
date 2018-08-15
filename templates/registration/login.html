@@ -1,0 +1,28 @@
+<!-- templates/registration/login.html -->
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div id="login" class="container">
+  <div class="content">
+    <h1 class="title has-text-centered">Login</h1>
+    <form class="control has-text-centered" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="button is-success">Entrar</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block css %}
+<style type="text/css">
+  .content ul {
+    list-style: none;
+  }
+</style>
+{% endblock %}
+
+{% block js %}
+{% endblock %}
