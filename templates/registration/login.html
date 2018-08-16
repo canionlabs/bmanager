@@ -1,15 +1,32 @@
-<!-- templates/registration/login.html -->
 {% extends 'base.html' %}
+
+{% load widget_tweaks %}
+
 
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<div id="login" class="container">
+<div id="login" class="container" style="margin-top: 150px;">
   <div class="content">
-    <h1 class="title has-text-centered">Login</h1>
-    <form class="control has-text-centered" method="post">
+    <form class="control has-text-centered" style="margin-left: 20%; margin-right: 20%;" method="post">
       {% csrf_token %}
-      {{ form.as_p }}
+      {{ form.non_field_errors }}
+      <div class="field">
+        <p class="control has-icons-left">
+          {{ form.username|add_class:"input"|attr:"placeholder: Usuário"  }}
+          <span class="icon is-small is-left">
+            <i class="fas fa-user"></i>
+          </span>
+        </p>
+      </div>
+      <div class="field">
+        <p class="control has-icons-left">
+          {{ form.password|add_class:"input"|attr:"placeholder: Senha"  }}
+          <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+        </p>
+      </div>
       <button type="submit" class="button is-success">Entrar</button>
     </form>
   </div>
