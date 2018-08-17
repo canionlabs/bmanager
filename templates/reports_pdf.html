@@ -1,0 +1,75 @@
+<!-- templates/home.html -->
+{% load staticfiles %}
+{% load reports_tags %}
+
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html <html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <title>MONAR - Plataforma</title>
+</head>
+<style type="text/css">
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 3px;
+  }
+
+  tr:nth-child(even) {
+      background-color: #dddddd;
+  }
+</style>
+<body>
+  <nav style="margin-bottom: 80px;" class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://monar.canionlabs.io">
+        <img style="width: 180px;" src="{% static "monar-logo.png" %}">
+      </a>
+    </div>
+  </nav>
+<div id="reports" class="container">
+  <div class="content">
+    <div class="columns">
+      <h1 class="title column is-3">Relatório Diário - {{ desired_date|date:"d/m/Y" }}</h1>
+    </div>
+    <div class="columns">
+      <div class="column is-4 is-offset-4">
+        <div class="field">
+          <div class="control">
+            <input v-model="date" style="text-align: center;" class="input" type="date" value="{{ desired_date|date:"Y-m-d" }}">
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <button @click="updateDate" class="button"><span class="icon is-small"><i class="fas fa-sync-alt"></i></span></button>
+      </div>  
+    </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th style="text-align: center;">Dispositivo</th>
+          <th style="text-align: center;">Temperatura (Celsius)</th>
+          <th style="text-align: center;">Horário</th>
+        </tr>
+      </thead>        
+      <tbody>
+        {% for report in reporting_list %}
+        <tr>
+          <td style="text-align: center;">{% get_device_name report.device_id report.email %}</td>
+          <td style="text-align: center;">{{report.doublevalue}} C</td>
+          <td style="text-align: center;">{{report.ts}}</td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td style="text-align: center;" colspan="3">
+            Sem registros
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <br>
+  </div>
+</div>

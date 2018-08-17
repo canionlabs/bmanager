@@ -5,24 +5,27 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<div class="container">
+<div id="reports" class="container">
   <div class="content">
     <div class="columns">
       <h1 class="title column is-3">Relatório Diário</h1>
       <div class="column">
         <a class="button is-primary is-outlined">
-          <span>Imprimir</span>
+          <span @click="gotoPDF">Imprimir</span>
         </a>
       </div>
     </div>
     <div class="columns">
       <div class="column is-4 is-offset-4">
         <div class="field">
-          <div class="control">
-            <input  style="text-align: center;" class="input" type="date" value="{{ desired_date|date:"Y-m-d" }}">
+          <div class="">
+            <input v-model="date" style="text-align: center;" class="input" type="date" value="{{ desired_date|date:"Y-m-d" }}">
           </div>
         </div>
       </div>
+      <div class="column">
+        <button @click="updateDate" class="button"><span class="icon is-small"><i class="fas fa-sync-alt"></i></span></button>
+      </div>  
     </div>
 
     <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
@@ -52,4 +55,43 @@
     <br>
   </div>
 </div>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+  var reports = new Vue({
+    el: '#reports',
+    data: {
+      date: '',
+    },
+    methods: {
+      updateDate: function () {
+        if (this.date !== '') {
+          newDate = this.date.split("-")
+          param = "date=" + newDate[2] + "/" + newDate[1] + "/" + newDate[0]
+          newUrl = "http://localhost:8000/?" + param
+          window.location.href = newUrl
+          console.log(this.date)
+        }
+      },
+      gotoPDF: function() {
+        if (this.date !== '') {
+          newDate = this.date.split("-")
+          param = "date=" + newDate[2] + "/" + newDate[1] + "/" + newDate[0]
+          newUrl = "http://localhost:8000/pdf/?" + param
+          window.location.href = newUrl
+        } else {
+          rawDate = "{{ desired_date|date:"Y-m-d" }}"
+          newDate = rawDate.split("-")
+          param = "date=" + newDate[2] + "/" + newDate[1] + "/" + newDate[0]
+          newUrl = "http://localhost:8000/pdf/?" + param
+          window.location.href = newUrl
+        }
+      },
+      updateFieldDate: function() {
+        this.date.value = this.date
+      },
+    },
+  })
+</script>
 {% endblock %}

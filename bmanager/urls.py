@@ -18,11 +18,12 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
-from apps.dashboard.views import ReportsView
+from apps.dashboard.views import ReportsView, ReportsPDFView
 
 
 urlpatterns = [
 	path('admin/', admin.site.urls),
 	path('accounts/', include('django.contrib.auth.urls')),
 	path('', ReportsView.as_view(), name='reports'),
+    path('pdf/', ReportsPDFView.as_view(), name='reports-pdf'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
