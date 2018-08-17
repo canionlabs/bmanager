@@ -7,8 +7,9 @@ from apps.breports.models import ReportingRawData
 
 from datetime import date, datetime
 
-class HomeView(LoginRequiredMixin, TemplateView):
-    template_name='home.html'
+
+class ReportsView(LoginRequiredMixin, TemplateView):
+    template_name='reports.html'
     login_url = 'accounts/login/'
     redirect_field_name = 'redirect_to'
     model = ReportingRawData
@@ -20,9 +21,9 @@ class HomeView(LoginRequiredMixin, TemplateView):
         if request.GET.get('date'):
             desired_date = request.GET.get('date')
             self.filter_date = datetime.strptime(desired_date, '%d/%m/%Y')
-            return self.model.objects.filter(ts__date=self.filter_date)
+            return self.model.objects.filter(ts__date=self.filter_date, pin=7)
 
-        return self.model.objects.filter(ts__date=self.filter_date)
+        return self.model.objects.filter(ts__date=self.filter_date, pin=7)
 
 
     def set_filter_date(self, new_date):

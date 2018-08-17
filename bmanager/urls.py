@@ -18,11 +18,11 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
-from apps.dashboard.views import HomeView
+from apps.dashboard.views import ReportsView
 
 
 urlpatterns = [
 	path('admin/', admin.site.urls),
 	path('accounts/', include('django.contrib.auth.urls')),
-	path('', HomeView.as_view(), name='home'),
+	path('', ReportsView.as_view(), name='reports'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
