@@ -1,10 +1,39 @@
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.base import TemplateView
+from django.views.generic import ListView
 
+from apps.breports.models import ReportingRawData
 
-# Create your views here.
+from datetime import date, datetime
+
 class HomeView(LoginRequiredMixin, TemplateView):
+    template_name='home.html'
     login_url = 'accounts/login/'
     redirect_field_name = 'redirect_to'
-    template_name='home.html'
+    model = ReportingRawData
+
+    filter_date = date.today()
+
+
+    def get_queryset(self, request):
+        if request.GET.get('date'):
+            desired_date = request.GET.get('date')
+            self.filter_date = datetime.strptime(desired_date, '%d/%m/%Y')
+            return self.model.objects.filter(ts__date=self.filter_date)
+
+        return self.model.objects.filter(ts__date=self.filter_date)
+
+
+    def set_filter_date(self, new_date):
+        self.filter_date = filter_date
+
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data()
+        context.update(dict(
+            reporting_list = self.get_queryset(request),
+            desired_date = self.filter_date
+        ))
+
+        return self.render_to_response(context)
