@@ -47,7 +47,8 @@ LOCAL_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-    'widget_tweaks'
+    'widget_tweaks',
+    'rest_framework'
 ]
 
 INSTALLED_APPS = (DEFAULT_APPS + BINTEGRATION_APPS + LOCAL_APPS + THIRD_PARTY_APPS)

@@ -24,6 +24,7 @@ from apps.dashboard.views import ReportsView, ReportsPDFView
 urlpatterns = [
 	path('admin/', admin.site.urls),
 	path('accounts/', include('django.contrib.auth.urls')),
+    path('api-auth/', include('rest_framework.urls')),
 	path('', ReportsView.as_view(), name='reports'),
     path('pdf/', ReportsPDFView.as_view(), name='reports-pdf'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
